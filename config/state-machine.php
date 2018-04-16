@@ -1,6 +1,8 @@
 <?php
     
     return [
+        
+        //First workflow
         'simple'     => [
             // class of your domain object
             'class'         => App\Order::class,
@@ -30,9 +32,11 @@
                 'ask_for_changes' => [
                     'from' => ['pending_review','accepted'],
                     'to'   => ['awaiting_changes'],
-                    // to make the from states dependent on each other
-                    // (cant proceed unless if all from states are in the current states)
-                    // 'dependent' =>  true,
+                    //'dependent' =>  true,
+                    /*
+                      dependent to make the from states dependent on each other
+                     (cant proceed unless if all from states are in the current states)
+                    */
                 ],
                 'cancel_changes'  => [
                     'from' => ['awaiting_changes'],
@@ -124,6 +128,9 @@
                 ],
             ],
         ],
+        
+        
+        //second workflow
         'orders2Dir' => [
             // class of your domain object
             'class'         => App\Order::class,
@@ -144,14 +151,15 @@
             //      S3 splitted_by t1
             //      S4 splitted_by t1, t2
             //      S5 splitted_by t1, t2
+            
             'states'        => [
-                'new'                                      => [
+                'new' /*state name*/                       => [
                     'splitted_by' => []
                 ],
                 'waiting_HR_approval'                      => [
                     'splitted_by' => ['resignation_request']
                 ],
-                'exit_enterview_done'                      => [
+                'exit_interview_done'                      => [
                     'splitted_by' => ['resignation_request']
                 ],
                 'waiting_docs_in_branch'                   => [
@@ -242,12 +250,12 @@
                     // branching to be the same type for all branches (dependent, independent)
                     'to'   => ['waiting_HR_approval','waiting_IT_approval','waiting_accountant_approval'],
                 ],
-                'exit_enterview'                          => [
+                'exit_interview'                          => [
                     'from' => ['waiting_HR_approval'],
-                    'to'   => ['exit_enterview_done'],
+                    'to'   => ['exit_interview_done'],
                 ],
                 'prepare_docs'                            => [
-                    'from' => ['exit_enterview_done'],
+                    'from' => ['exit_interview_done'],
                     'to'   => ['waiting_docs_in_branch','waiting_docs_in_main_office'],
                 ],
                 'deliver_docs_in_branch'                  => [

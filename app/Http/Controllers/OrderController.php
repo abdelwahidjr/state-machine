@@ -30,7 +30,8 @@ class OrderController extends Controller
     {
         
         $orderSM = \StateMachine::get($order, 'orders2Dir');
-        dd($orderSM);
+        
+        //dd($orderSM);
         return view('orders.show', compact(['orderSM', 'order']));
     }
 

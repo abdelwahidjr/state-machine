@@ -11,7 +11,9 @@
 
                         <ul class="list-unstyled">
                             @foreach ($orders as $order)
-                                <li><a href="orders/{{$order->id}}">{{$order->title}}</a></li>
+                                <li>
+                                    <a href="orders/{{$order->id}}">{{$order->title}}</a>
+                                </li>
                             @endforeach
                         </ul>
 
